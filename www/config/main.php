@@ -66,6 +66,8 @@ return [
 					'route' => 'v1/video/get-list',
 					'suffix' => '/',
 				],
+				"/video/get-markers/" => 'v1/video/get-markers',
+				"/video/get-markers/<id:\d+>" => 'v1/video/get-markers',
 				[
 					'pattern' => '/video/get-markers',
 					'route' => 'v1/video/get-markers',

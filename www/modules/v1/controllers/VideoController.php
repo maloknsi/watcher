@@ -26,7 +26,7 @@ class VideoController extends Controller
 
 	public function actionGetMarkers($id){
 		$journal = Journal::find()
-			->where(['status'=>User::STATUS_ACTIVE, 'external_code'=>intval($id)])
+			->where(['status'=>User::STATUS_ACTIVE, 'external_code'=>$id])
 			->andFilterCompare('publish_at',new \yii\db\Expression('NOW()'),'<')
 			->limit(1)->one();
 		/** @var Journal $journal */
