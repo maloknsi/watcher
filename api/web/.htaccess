@@ -1,0 +1,21 @@
+<IfModule mod_headers.c>
+   Header set Access-Control-Allow-Origin "%{HTTP_ORIGIN}e" env=HTTP_ORIGIN
+   Header add Access-Control-Allow-Headers "authorization, origin, x-requested-with, content-type, accept, set-cookie"
+   Header set Access-Control-Allow-Credentials true
+   Header add Access-Control-Allow-Methods "GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS"
+</IfModule>
+
+IndexIgnore */*
+
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options +FollowSymLinks
+    </IfModule>
+    RewriteEngine On
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    RewriteRule . index.php
+
+</IfModule>
