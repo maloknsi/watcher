@@ -67,7 +67,7 @@ class JournalController extends CController
 		$journalVideosArray = ['files'=>[],'names'=>[],];
 		foreach ($journal->videos as $journalVideo){
 			$fileVideo = $journal->external_code.'-'.$journalVideo->number.'.mp4';
-			$journalVideosArray['files'][] = 'http://api.watcher.ua/' . $fileVideo;
+			$journalVideosArray['files'][] = \Yii::$app->params['pathVideo'] . $fileVideo;
 			$journalVideosArray['names'][] = [
 				'caption'=>$journalVideo->number,'size'=>@filesize(\Yii::getAlias('@api')."/web/".$fileVideo),'type'=>'video', 'filetype' => 'video/mp4',
 				'key' => $journalVideo->id, 'downloadUrl' => \Yii::$app->params['pathVideo']. $fileVideo, 'filename' => $fileVideo,
