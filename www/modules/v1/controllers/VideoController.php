@@ -21,7 +21,7 @@ class VideoController extends Controller
 			->where(['status'=>User::STATUS_ACTIVE])->andFilterCompare('publish_at',new \yii\db\Expression('NOW()'),'<')
 			->orderBy(['publish_at'=>SORT_DESC])->limit(1)->one();
 		$videoCount = Video::find()->where(['journal_id'=>$journal->id])->count();
-		return [['journal-id'=>$journal->external_code, 'video-quantity'=>$videoCount]];
+		return [['journal-id'=>$journal->external_code, 'video-quantity'=>intval($videoCount)]];
 	}
 
 	public function actionGetMarkers($id){
