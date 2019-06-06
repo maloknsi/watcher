@@ -5,6 +5,7 @@ namespace backend\controllers;
 use backend\models\Journal;
 use backend\models\JournalSearch;
 use backend\components\CController;
+use common\models\User;
 use common\models\Video;
 use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
@@ -102,7 +103,7 @@ class JournalController extends CController
 					'error' => $video->hasErrors()? Html::errorSummary($video, ['header'=>'','footer'=>'','encode'=>false]) : null,
 				];
 			}
-
+			Journal::updateAll(['status' => User::STATUS_DELETED],['id'=>$video->journal->id]);
 		} else {
 			$output['error'] = 'не найден журнал #'.$id;
 		}
@@ -118,11 +119,11 @@ class JournalController extends CController
 			$fileVideo = $video->journal->external_code.'-'.$video->number.'.mp4';
 			@unlink(\Yii::getAlias('@api')."/web/".$fileVideo);
 			$video->delete();
+			Journal::updateAll(['status' => User::STATUS_DELETED],['id'=>$video->journal->id]);
 		} else {
 			$output['error'] = 'не найден файл видео #'. $videoId;
 		}
 		return json_encode($output);
 
 	}
-
 }
